@@ -1,4 +1,4 @@
-#Last Edited by Jean Brack 2/20/17
+#Last Edited by Jean Brack 3/15/17
 #!/usr/bin/python
 import time
 # Import the Raspberry Pi GPIO libraries that
