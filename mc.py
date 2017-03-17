@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Last modified 2/7/2017 Jean Brack
+# Last modified 3/15/2017 Jean Brack
 # initially from https://www.youtube.com/watch?v=XvOONPSoglY
 # Modified to work with DC Motors through L298N 1/30/17
 # mc is short for Motor Control
