@@ -1,4 +1,4 @@
-#Last Edited by Jean Brack 3/15/17
+#Last Edited by Jean Brack 3/20/17
 #!/usr/bin/python
 import time
 # Import the Raspberry Pi GPIO libraries that
@@ -32,7 +32,7 @@ GPIO.output(Motor2,GPIO.LOW)
 cmd = 'mpg123 /home/pi/sounds/Be*.mp3 > /dev/null 2>/dev/null &'
 os.system(cmd)
 try:
-        OFFDELAY=.011
+        OFFDELAY=.025
         ONDELAY=.01
         counter=100
         while counter > 0:
@@ -45,7 +45,7 @@ try:
                 GPIO.output(Motor2,GPIO.LOW)
                 GPIO.output(LIGHT,GPIO.LOW)
                 counter = counter - 1
-	OFFDELAY=.009
+	OFFDELAY=.017
 	ONDELAY=.01
 	counter=100
 	while counter > 0:
@@ -58,7 +58,7 @@ try:
 		GPIO.output(Motor2,GPIO.LOW)
 		GPIO.output(LIGHT,GPIO.LOW)
 		counter = counter - 1
-	OFFDELAY=.007
+	OFFDELAY=.011
 	ONDELAY=.01
 	counter=500
         while counter > 0:
@@ -71,7 +71,7 @@ try:
                 GPIO.output(Motor2,GPIO.LOW)
                 GPIO.output(LIGHT,GPIO.LOW)
                 counter = counter - 1
-        OFFDELAY=.009
+        OFFDELAY=.017
         ONDELAY=.01
         counter=100
         while counter > 0:
@@ -84,7 +84,7 @@ try:
                 GPIO.output(Motor2,GPIO.LOW)
                 GPIO.output(LIGHT,GPIO.LOW)
                 counter = counter - 1
-	OFFDELAY=.011
+	OFFDELAY=.025
 	ONDELAY=.01
         counter=100
         while counter > 0:
