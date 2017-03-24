@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>File name:</strong>
+  <%= @light.file_name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @light.status %>
+</p>
+
+<%= link_to 'Edit', edit_light_path(@light) %> |
+<%= link_to 'Back', lights_path %>
