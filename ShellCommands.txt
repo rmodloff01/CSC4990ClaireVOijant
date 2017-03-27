@@ -1,6 +1,6 @@
 Shell Commands for the pi:
 
-Take a picture: fswebcam -r 640x480 --jpeg 85 -D 1 picture-name.jpg
+Take a picture: fswebcam -r 1280x720 --no-banner image3.jpg
 	
 	*we need to figure out how to name each picture, perhaps with a date/time
 	
