@@ -1,0 +1,17 @@
+Shell Commands for the pi:
+
+Take a picture: fswebcam -r 640x480 --jpeg 85 -D 1 picture-name.jpg
+	
+	*we need to figure out how to name each picture, perhaps with a date/time
+	
+Record audio & play audio on pi: arecord test.wav 
+								 aplay test.wav
+								 
+Start livestreaming video: /usr/sbin/webcam.sh
+
+	*to stop: ctrl + c, then type pkill ffserver
+
+Record video as a mkv file: ffmpeg -f v4l2 -framerate 25 -video_size 640x480 -i /dev/video0 filename.mkv
+
+	*you can duplicate this video/convert to mp4 with: ffmpeg -i filename.mkv -vcodec copy -acodec copy 1.mp4
+	
