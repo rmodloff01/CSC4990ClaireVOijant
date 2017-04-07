@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Last modified 3/15/2017 Jean Brack
+# Last modified 2/7/2017 Jean Brack
 # initially from https://www.youtube.com/watch?v=XvOONPSoglY
 # Modified to work with DC Motors through L298N 1/30/17
 # mc is short for Motor Control
@@ -24,8 +24,8 @@ DELAY=.0
 # CODE: LB means gpio to move the Left Motor / Wheel backward
 # CODE: RF means gpio to move the Right Motor / Wheel forward
 # CODE: RB means gpio to move the Right Motor / Wheel backward
-LF=10
-LB=8
+LF=29
+LB=31
 
 GPIO.setup(LF,GPIO.OUT) #Left Forward GPIO Port Output
 GPIO.output(LF,GPIO.LOW) #Left Forward GPIO Port set to LOW

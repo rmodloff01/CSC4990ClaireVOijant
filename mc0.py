@@ -18,11 +18,11 @@ GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD)
 # Set Pin 16 on the GPIO header to act as
 # the output port to control forward movement on RIGHTWHEEL
-LIGHT=7
+LIGHT=33
 OFFDELAY=.0001
 ONDELAY=.01
-Motor1=10
-Motor2=8
+Motor1=29
+Motor2=31
 GPIO.setup(LIGHT,GPIO.OUT)
 GPIO.setup(Motor1,GPIO.OUT)
 GPIO.setup(Motor2,GPIO.OUT)
