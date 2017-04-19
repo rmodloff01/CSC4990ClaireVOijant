@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /var/www/html/claire
+
+/home/pi/.rvm/gems/ruby-2.4.0/bin/rails s

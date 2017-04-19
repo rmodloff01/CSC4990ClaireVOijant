@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TIME=`date +"%Y_%m_%d_%H-%M"`
+IMAGENAME="$TIME"_image.jpg
+
+fswebcam -r 1280x720 --no-banner /var/www/html/$IMAGENAME
+
+INTIP=`ifconfig | grep "inet addr" | grep "Bcast:" | sed 's/.*inet addr://' | sed 's/ .*//'`
+
+echo "View this image at $INTIP/$IMAGENAME"
+

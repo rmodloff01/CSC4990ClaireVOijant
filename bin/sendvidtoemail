@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#
+if [ $# -ne 2 ]; then
+        echo "Usage: $0 EMAIL_ADDRESS UNIQUE_VIDEO"
+        exit 1
+fi
+
+EMAIL_ADDRESS=$1
+UNIQUE_VIDEO=$2
+DATE=`date`
+cd /var/www/html/claire/app/assets/images/videos
+
+#FILE=`ls -l $UNIQUE_VIDEO`
+echo "Sending a copy of $UNIQUE_VIDEO" > /tmp/message.txt
+#echo "Sending a copy of" | sudo festival --tts
+echo "/var/www/html/claire/app/assets/images/pictures/$UNIQUE_VIDEO" >> /tmp/message.txt
+#echo "$UNIQUE_VIDEO" | sudo festival --tts
+echo "to $EMAIL_ADDRESS at $DATE" >> /tmp/message.txt
+#echo "to $2 at $DATE" | sudo festival --tts
+
+SUBJECT="Video From ClaireVOijant at $DATE"
+
+cat /tmp/message.txt | mutt -s "$SUBJECT" $EMAIL_ADDRESS -a $UNIQUE_VIDEO

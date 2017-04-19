@@ -1,0 +1,10 @@
+#!/bin/bash
+
+TIME=`date +"%Y_%m_%d_%H-%M"`
+SOUNDNAME="$TIME"_sound.wav
+
+arecord -d 10 /var/www/html/$SOUNDNAME
+
+INTIP=`ifconfig | grep "inet addr" | grep "Bcast:" | sed 's/.*inet addr://' | sed 's/ .*//'`
+
+echo "Hear this at $INTIP/$SOUNDNAME"

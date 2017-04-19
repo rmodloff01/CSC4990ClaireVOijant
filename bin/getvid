@@ -1,0 +1,25 @@
+#!/bin/bash
+
+TIME=`date +"%Y_%m_%d_%H-%M"`
+VIDEONOSOUND= video_no_sound.mkv
+SOUNDNAME= sound_name.wav
+VIDEOWITHSOUND= video_with_sound.mkv
+VIDEOWITHSOUNDMP4="$TIME"_video.mp4
+
+arecord -t 10 $SOUNDNAME&
+
+ffmpeg -f v4l2 -framerate 25 -video_size 640x480 -d 10 -i /dev/video0 $VIDEONOSOUND
+
+ffmpeg -i $VIDEONOSOUND -i $SOUNDNAME -c copy $VIDEOWITHSOUND
+
+ffmpeg -i $VIDEOWITHSOUND -vcodec copy -acodec copy /var/www/html/$VIDEOWITHSOUNDMP4
+
+INTIP=`ifconfig | grep "inet addr" | grep "Bcast:" | sed 's/.*inet addr://' | sed 's/ .*//'`
+
+echo "View this at $INTIP/$VIDEOWITHSOUNDMP4"
+
+rm $SOUNDNAME
+
+rm $VIDEONOSOUND
+
+rm $VIDEOWITHSOUND

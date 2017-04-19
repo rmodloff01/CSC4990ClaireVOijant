@@ -1,0 +1,3 @@
+#!/bin/bash
+INTIP=`ifconfig | grep "inet addr" | grep "Bcast:" | sed 's/.*inet addr://' | sed 's/ .*//'`
+echo "$INTIP"

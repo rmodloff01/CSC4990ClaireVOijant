@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#EXTIP=`curl -s icanhazip.com`
+curl -s ipinfo.io/ip | tee /tmp/OijExtIP.txt`

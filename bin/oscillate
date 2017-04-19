@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ~/pybin
+sudo python mc0.py
+sudo python mc1.py
+
