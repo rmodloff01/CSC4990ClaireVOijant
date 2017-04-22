@@ -1,0 +1,6 @@
+# Make a noise and power off the pi
+
+echo "Thank you for shutting down your Pi properly!"
+echo "Please wait for 5467 microseconds before disconnecting the power."
+sudo aplay /home/pi/sounds/PoweringDown.wav 2> /dev/null
+sudo poweroff

@@ -7,15 +7,19 @@ if [ $# -ne 1 ]; then
 fi
 
 TIME=`date +"%Y_%m_%d_%H-%M"`
-cd /var/www/html/videos
+cd /var/www/html/claire/app/assets/images/videos
 DATE=`date`
 FILENAME="$TIME"_video.mp4
 
-arecord -d 10 /var/www/html/sounds/sound.wav& ffmpeg -f v4l2 -framerate 25 -video_size 640x480 -t 10 -i /dev/video0 /var/www/html/videos/video.mkv
+/home/pi/bin/stopstream  > /dev/null 2>/dev/null
 
-ffmpeg -i /var/www/html/videos/video.mkv -i /var/www/html/sounds/sound.wav -c copy /var/www/html/videos/video_sound.mkv
+sleep 2
 
-ffmpeg -i /var/www/html/videos/video_sound.mkv /var/www/html/videos/$FILENAME
+arecord -d 10 -r 4000 /var/www/html/sounds/sound.wav& ffmpeg -f v4l2 -framerate 25 -video_size 640x480 -t 10 -i /dev/video0 /var/www/html/videos/video.mkv > /dev/null 2>/dev/null
+
+ffmpeg -i /var/www/html/videos/video.mkv -i /var/www/html/sounds/sound.wav -c copy /var/www/html/videos/video_sound.mkv > /dev/null 2>/dev/null
+
+ffmpeg -i /var/www/html/videos/video_sound.mkv /var/www/html/claire/app/assets/images/videos/$FILENAME > /dev/null 2>/dev/null
 
 rm /var/www/html/videos/video.mkv
 rm /var/www/html/sounds/sound.wav
@@ -23,12 +27,16 @@ rm /var/www/html/videos/video_sound.mkv
 
 FILE=`ls -l $FILENAME`
 
-echo "Sending a copy of" > message.txt
+echo "Sending a copy of" > /tmp/message.txt
 
-echo "$FILE" >> message.txt
+echo "$FILE" >> /tmp/message.txt
 
-echo "to $2 at $DATE" >> message.txt
+echo "to $1 at $DATE" >> /tmp/message.txt
 
 SUBJECT="Video From ClaireVOijant at $DATE"
 
 cat /tmp/message.txt | mutt -s "$SUBJECT" $1 -a $FILENAME
+
+sleep 2
+
+/home/pi/bin/startstream  > /dev/null 2>/dev/null

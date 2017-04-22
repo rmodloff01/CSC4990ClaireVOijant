@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo mpg123 /home/pi/sounds/r2*.mp3

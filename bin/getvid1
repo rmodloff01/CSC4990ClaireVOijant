@@ -1,0 +1,28 @@
+#!/bin/bash
+
+/home/pi/bin/stopstream  > /dev/null 2>/dev/null
+
+sleep 3
+
+TIME=`date +"%Y_%m_%d_%H-%M"`
+VIDEOWITHSOUNDMP4="$TIME"_video.mp4
+
+arecord -d 10 /var/www/html/sounds/sound1.wav& ffmpeg -f v4l2 -framerate 25 -video_size 640x480 -t 10 -i /dev/video0 /var/www/html/videos/video_no_sound1.mkv
+
+ffmpeg -i /var/www/html/videos/video_no_sound1.mkv -i /var/www/html/sounds/sound1.wav -c copy /var/www/html/videos/video_sound1.mkv
+
+ffmpeg -i /var/www/html/videos/video_sound1.mkv -vcodec copy -acodec copy /var/www/html/claire/app/assets/images/videos/$VIDEOWITHSOUNDMP4
+
+INTIP=`ifconfig | grep "inet addr" | grep "Bcast:" | sed 's/.*inet addr://' | sed 's/ .*//'`
+
+echo "View this at $INTIP/$VIDEOWITHSOUNDMP4"
+
+rm /var/www/html/sounds/sound1.wav
+
+rm /var/www/html/videos/video_no_sound1.mkv
+
+rm /var/www/html/videos/video_sound1.mkv
+
+sleep 3
+
+/home/pi/bin/startstream > /dev/null 2>/dev/null

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Find file with a string in it.
+
+if [ $# -ne 2 ]; then
+        echo "Usage: $0 directory string"
+        echo "where \"directory\" is the location where you want to search and \"string\" is what you seek."
+        echo "This command will list the files (uses sudo) that contain that string."
+        exit 1
+fi
+if [ ! -d $1 ]; then
+        echo "No such directory $1!"
+        exit 1
+fi
+
+#for file in `sudo find $1 -type f`; do
+#       sudo grep -l $2 $file
+#done
+
+# Show the class this cool "Googled" option to find / grep
+#find /etc -type f -exec grep -Iq . {} \; -and -print
+for file in `sudo find $1 -type f -exec grep -Iq . {} \; -and -print`; do
+        sudo grep -l $2 $file
+done

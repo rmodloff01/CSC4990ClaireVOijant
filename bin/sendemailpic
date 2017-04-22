@@ -11,11 +11,11 @@ cd /var/www/html/claire/app/assets/images/pictures
 DATE=`date`
 FILENAME="$TIME"_image.jpg
 
-/home/pi/bin/stopstream
+/home/pi/bin/stopstream  > /dev/null 2>/dev/null
 
-sleep 4
+sleep 2
 
-fswebcam -r 1280x720 --no-banner /var/www/html/claire/app/assets/images/pictures/$FILENAME
+fswebcam -r 1280x720 --no-banner /var/www/html/claire/app/assets/images/pictures/$FILENAME > /dev/null 2>/dev/null
 
 FILE=`ls -l $FILENAME`
 echo "Sending a copy of" > /tmp/message.txt
@@ -29,6 +29,6 @@ SUBJECT="Picture From ClaireVOijant at $DATE"
 
 cat /tmp/message.txt | mutt -s "$SUBJECT" $1 -a $FILENAME
 
-sleep 4
+sleep 2
 
-/home/pi/bin/startstream
+/home/pi/bin/startstream  > /dev/null 2>/dev/null

@@ -1,0 +1,2 @@
+#!/bin/bash
+pico2wave -w /tmp/temp.wav "'$*'" && mplayer /tmp/temp.wav > /dev/null 2>&1 && rm /tmp/temp.wav

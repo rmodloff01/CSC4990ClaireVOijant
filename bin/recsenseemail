@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# This acronym shell script is short for Record, Sense, EMail
+#
+if [ $# -ne 1 ]; then
+        echo "Usage: $0 EMAIL_ADDRESS"
+        exit 1
+fi
+# We will make the default recording time 12 seconds, shooting at 5 seconds
+sudo /home/pi/bin/vol 90
+echo "Recording for 10 seconds."
+sudo mpg123 /home/pi/sounds/TapingYou.mp3 >/dev/null 2>/dev/null
+
+TIME=`date +"%Y_%m_%d_%H-%M"`
+cd /tmp
+echo "Sensory readings and video recorded from OijLamentary at $TIME" > message.txt
+d l >> message.txt
+d f >> message.txt
+d r >> message.txt
+light1 >> message.txt
+inttemp >> message.txt
+sudo rm -f ./rv.h264
+sudo raspivid -n -w 640 -h 480 -o ./rv.h264 -t 10000 >/dev/null 2>/dev/null
+#sudo raspivid -n -w 320 -h 240 -o ./rv.h264 -t 10000 >/dev/null 2>/dev/null
+VID=$TIME.vid.mp4
+echo "Converting H264 to $VID"
+echo "Converting H264 to $VID" | sudo festival --tts&
+sudo MP4Box -add ./rv.h264 $VID >/dev/null 2>/dev/null
+
+echo "Sending /tmp/$VID to $1"
+echo "Sending /tmp/$VID to $1" | sudo festival --tts&
+
+SUBJECT="Video_From_OijLamentary_$TIME"
+
+DATE=`date`
+cat /tmp/message.txt | mutt -s "Sensory readings and quick video from OijLamentary at $DATE" $1 -a $VID

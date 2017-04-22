@@ -3,8 +3,8 @@
 TIME=`date +"%Y_%m_%d_%H-%M"`
 SOUNDNAME="$TIME"_sound.wav
 
-arecord -d 10 /var/www/html/$SOUNDNAME
+arecord -d 10 /var/www/html/sounds/$SOUNDNAME
 
 INTIP=`ifconfig | grep "inet addr" | grep "Bcast:" | sed 's/.*inet addr://' | sed 's/ .*//'`
 
-echo "Hear this at $INTIP/$SOUNDNAME"
+echo "Hear this at $INTIP/sounds/$SOUNDNAME"

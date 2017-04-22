@@ -1,0 +1,12 @@
+#!/bin/bash
+
+LINES=`wc -l ~/misc/badjokes.txt | sed -e 's/ .*//'`
+
+rnd=`echo $((1 + RANDOM % $LINES))`
+
+BADJOKE=`sed "${rnd}q;d" ~/misc/badjokes.txt`
+
+echo $BADJOKE
+
+echo $BADJOKE | sudo festival --tts
+echo $BADJOKE | sudo espeak

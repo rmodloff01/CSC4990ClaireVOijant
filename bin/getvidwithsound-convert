@@ -1,0 +1,11 @@
+#!/bin/bash
+
+arecord -d 10 /var/www/html/sounds/sound.wav& ffmpeg -f v4l2 -framerate 25 -video_size 640x480 -t 10 -i /dev/video0 /var/www/html/videos/video.mkv
+
+ffmpeg -i /var/www/html/videos/video.mkv -i /var/www/html/sounds/sound.wav -c copy /var/www/html/videos/video_sound.mkv
+
+ffmpeg -i /var/www/html/videos/video_sound.mkv /var/www/html/videos/video_sound_mp4.mp4
+
+rm /var/www/html/videos/video.mkv
+rm /var/www/html/sounds/sound.wav
+rm /var/www/html/videos/video_sound.mkv

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+/home/pi/bin/startstream
+
+sudo aplay /home/pi/sounds/bleep_01.wav 2> /dev/null
+sudo aplay /home/pi/sounds/BootedPi.wav 2> /dev/null
+
+sudo mpg123 /home/pi/sounds/bub1.mp3 2> /dev/null&
+
+#sleep 20
+#/home/pi/bin/startrails

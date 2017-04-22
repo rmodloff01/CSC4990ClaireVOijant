@@ -1,25 +1,27 @@
 #!/bin/bash
 
 TIME=`date +"%Y_%m_%d_%H-%M"`
-VIDEONOSOUND= video_no_sound.mkv
-SOUNDNAME= sound_name.wav
-VIDEOWITHSOUND= video_with_sound.mkv
-VIDEOWITHSOUNDMP4="$TIME"_video.mp4
+FILENAME="$TIME"_video.mp4
 
-arecord -t 10 $SOUNDNAME&
+/home/pi/bin/stopstream  > /dev/null 2>/dev/null
 
-ffmpeg -f v4l2 -framerate 25 -video_size 640x480 -d 10 -i /dev/video0 $VIDEONOSOUND
+sleep 2
 
-ffmpeg -i $VIDEONOSOUND -i $SOUNDNAME -c copy $VIDEOWITHSOUND
+arecord -d 10 -r 4000 /var/www/html/sounds/sound.wav&
 
-ffmpeg -i $VIDEOWITHSOUND -vcodec copy -acodec copy /var/www/html/$VIDEOWITHSOUNDMP4
+ffmpeg -f v4l2 -framerate 25 -video_size 640x480 -t 10 -i /dev/video0 /var/www/html/videos/video.mkv
+
+ffmpeg -i /var/www/html/videos/video.mkv -i /var/www/html/sounds/sound.wav -c copy /var/www/html/videos/video_sound.mkv
+ffmpeg -i /var/www/html/videos/video_sound.mkv /var/www/html/claire/app/assets/images/videos/$FILENAME
 
 INTIP=`ifconfig | grep "inet addr" | grep "Bcast:" | sed 's/.*inet addr://' | sed 's/ .*//'`
 
-echo "View this at $INTIP/$VIDEOWITHSOUNDMP4"
+echo "View this at $INTIP/$FILENAME"
 
-rm $SOUNDNAME
+rm /var/www/html/videos/video.mkv
+rm /var/www/html/sounds/sound.wav
+rm /var/www/html/videos/video_sound.mkv
 
-rm $VIDEONOSOUND
+sleep 2
 
-rm $VIDEOWITHSOUND
+/home/pi/bin/startstream  > /dev/null 2>/dev/null

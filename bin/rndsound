@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SONGS=`ls /home/pi/sounds/ClaireMP3s | wc -l`
+
+rnd=`echo $((1 + RANDOM % $SONGS))`
+
+
+if [ $rnd -lt 10 ]; then
+	rnd=0$rnd
+fi
+
+echo $rnd
+
+sudo killall mpg123
+
+sudo mpg123 /home/pi/sounds/ClaireMP3s/$rnd*.mp3 > /dev/null 2>/dev/null&

@@ -1,0 +1,29 @@
+# set the volume of the Pi's speaker
+
+if [ $# -ne 1 ]; then
+        echo "Usage: $0 VOL (where VOL is between 70 and 100)"
+        exit 1
+fi
+VOL=$1
+#Trick to assure that an integer was entered.
+if [ $VOL -!= $VOL ] 2>/dev/null; then
+        echo "Gimme an integer!"
+        echo "Usage: $0 VOL (where VOL is between 70 and 100)"
+        exit 1
+fi
+
+if [ $VOL -lt 70 ]; then
+        echo "Need more volume."
+        echo "Usage: $0 VOL (where VOL is between 70 and 100)"
+        exit 1
+fi
+if [ $VOL -gt 100 ]; then
+        echo "Too much volume"
+        echo "Usage: $0 VOL (where VOL is between 70 and 100)"
+        exit 1
+fi
+
+sudo amixer set PCM $VOL% >/dev/null 2>/dev/null
+sudo mpg123 /home/pi/sounds/Homer_Doh!.mp3 >/dev/null 2>/dev/null &
+sudo mpg123 /home/pi/sounds/Homer_Doh!.mp3 >/dev/null 2>/dev/null &
+echo "Doh!"
